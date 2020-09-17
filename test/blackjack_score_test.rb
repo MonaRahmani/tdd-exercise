@@ -27,7 +27,7 @@ describe 'Blackjack Score' do
     # Arrange
     hand = [3, "King"]
 
-    # Ace
+    # Act
     score = blackjack_score(hand)
 
     # Assert
@@ -40,7 +40,7 @@ describe 'Blackjack Score' do
     # Arrange
     hand = [3, "Queen"]
 
-    # Ace
+    # Act
     score = blackjack_score(hand)
 
     # Assert
@@ -53,7 +53,7 @@ describe 'Blackjack Score' do
     # Arrange
     hand = [3, "Jack"]
 
-    # Ace
+    # Act
     score = blackjack_score(hand)
 
     # Assert
@@ -63,27 +63,22 @@ describe 'Blackjack Score' do
 
 
   it 'calculates aces as 11 where it does not go over 21' do
-    # Arrange
 
+    score = blackjack_score(["Ace", 4])
+    expect(score).must_equal 15
 
-    # Ace
+    score = blackjack_score(["Ace", "Jack"])
+    expect(score).must_equal 21
 
-
-    # Assert
-
+    score = blackjack_score(["Ace", 4, 1])
+    expect(score).must_equal 16
 
   end
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
-    # Arrange
 
-
-    # Ace
-
-
-    # Assert
-
-
+    score = blackjack_score(["Ace", 3, "King"])
+    expect(score).must_equal 14
 
   end
 
