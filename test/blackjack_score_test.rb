@@ -18,10 +18,10 @@ describe 'Blackjack Score' do
 
   it 'face cards have values calculated correctly' do
 
-    score = blackjack_score(["Jack", "King"])
+    score = blackjack_score(["Queen", "King"])
     expect(score).must_equal 20
 
-    score = blackjack_score(["king", "Queen"])
+    score = blackjack_score(["king", "Jack"])
     expect(score).must_equal 20
 
   end
@@ -41,6 +41,12 @@ describe 'Blackjack Score' do
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
 
+    score = blackjack_score(["Ace", 3, 7, "King"])
+    expect(score).must_equal 21
+
+    score = blackjack_score(["Ace", 5, "King"])
+    expect(score).must_equal 16
+
     score = blackjack_score(["Ace", 3, "King"])
     expect(score).must_equal 14
 
@@ -48,11 +54,28 @@ describe 'Blackjack Score' do
 
   it 'raises an ArgumentError for invalid cards' do
 
+    expect{
+      blackjack_score([1])
+    }.must_raise ArgumentError
 
+    #  invalid card value
+    expect {
+      blackjack_score([30, "apple", "cat"])
+    }.must_raise ArgumentError
+
+    # hands contains more than 5 item
+    expect {
+      blackjack_score([1, 3, "King", 2, 4, 5])
+    }.must_raise ArgumentError
   end
 
   it 'raises an ArgumentError for scores over 21' do
+    expect {
+      blackjack_score([8, 9, 10])
+    }.must_raise ArgumentError
 
-
+    expect {
+      blackjack_score(["King", "Queen", 5])
+    }.must_raise ArgumentError
   end
 end
