@@ -25,13 +25,39 @@ describe 'Blackjack Score' do
   it 'face cards have values calculated correctly' do
 
     # Arrange
-
+    hand = [3, "King"]
 
     # Ace
-
+    score = blackjack_score(hand)
 
     # Assert
+    expect(score).must_equal 13
 
+  end
+
+  it 'face cards have values calculated correctly' do
+
+    # Arrange
+    hand = [3, "Queen"]
+
+    # Ace
+    score = blackjack_score(hand)
+
+    # Assert
+    expect(score).must_equal 13
+
+  end
+
+  it 'face cards have values calculated correctly' do
+
+    # Arrange
+    hand = [3, "Jack"]
+
+    # Ace
+    score = blackjack_score(hand)
+
+    # Assert
+    expect(score).must_equal 13
 
   end
 
