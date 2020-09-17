@@ -11,67 +11,31 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 describe 'Blackjack Score' do
   it 'can calculate the score for a pair of number cards' do
 
-    # Arrange
-    hand = [3, 4]
-
-    # Act
-    score = blackjack_score(hand)
-
-    # Assert <-  You do this part!
+    score = blackjack_score([3, 4])
     expect(score).must_equal 7
 
   end
 
   it 'face cards have values calculated correctly' do
 
-    # Arrange
-    hand = [3, "King"]
+    score = blackjack_score(["Jack", "King"])
+    expect(score).must_equal 20
 
-    # Act
-    score = blackjack_score(hand)
-
-    # Assert
-    expect(score).must_equal 13
+    score = blackjack_score(["king", "Queen"])
+    expect(score).must_equal 20
 
   end
-
-  it 'face cards have values calculated correctly' do
-
-    # Arrange
-    hand = [3, "Queen"]
-
-    # Act
-    score = blackjack_score(hand)
-
-    # Assert
-    expect(score).must_equal 13
-
-  end
-
-  it 'face cards have values calculated correctly' do
-
-    # Arrange
-    hand = [3, "Jack"]
-
-    # Act
-    score = blackjack_score(hand)
-
-    # Assert
-    expect(score).must_equal 13
-
-  end
-
 
   it 'calculates aces as 11 where it does not go over 21' do
 
-    score = blackjack_score(["Ace", 4])
-    expect(score).must_equal 15
+    score = blackjack_score(["Ace", 10])
+    expect(score).must_equal 21
 
     score = blackjack_score(["Ace", "Jack"])
     expect(score).must_equal 21
 
-    score = blackjack_score(["Ace", 4, 1])
-    expect(score).must_equal 16
+    score = blackjack_score(["Ace", 9, 1])
+    expect(score).must_equal 21
 
   end
 
