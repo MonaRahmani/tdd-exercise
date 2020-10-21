@@ -5,51 +5,39 @@
 VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
+  score = 0
 
-  #ArgumentError for length
   if hand.length > 5 || hand.length < 2
     raise ArgumentError.new("#must be between 2 and 5 items")
   end
 
-  #ArgumentError for invalid item
-  hand.each do |item|
-    unless VALID_CARDS.include?(item)
-      raise ArgumentError.new("invalid value")
-    end
-  end
+  ace_count = 0
 
+  hand.each do |card|
 
-  blackjack_score = 0
-  ace_arr = []
-
-  hand.each do |item|
-    case item
-    when "Jack"
-      blackjack_score += 10
-    when "Queen"
-      blackjack_score += 10
-    when "King"
-      blackjack_score += 10
-    when 2, 3, 4, 5, 6, 7, 8, 9, 10
-      blackjack_score += item
-    when item == "Ace"
-      ace_arr << item
-    end
-  end
-
-  #handeling Ace case
-  ace_arr.each do
-    if blackjack_score <= 10
-      blackjack_score += 11
+    case card
+    when "Jack", "Queen", "king"
+      card = 10
+    when "Ace"
+      card = 1
+      ace_count += 1
+    when (2..9)
+      card = card
     else
-      blackjack_score += 1
+      raise ArgumentError.new("invalid #{card}")
     end
+    score += card
   end
 
-  #ArgumentError for score over 21
-  if blackjack_score > 21
-    raise ArgumentError.new("#{blackjack_score} is larger than 21")
+  while score <= 11 && ace_count > 0
+    score += 10
+    ace_count -= 1
   end
-    return blackjack_score
+
+  if score <= 21
+    return score
+  else
+    raise ArgumentError.new("score is over 21")
+  end
 end
 
